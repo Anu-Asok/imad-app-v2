@@ -1,7 +1,8 @@
+var hostname="http://anu-asok.imad.hasura-app.io";
 var btn = document.getElementById('counter-btn');
 btn.onclick = function (){
     var request = new XMLHttpRequest();
-    request.open('GET','http://localhost:8080/counter',true);
+    request.open('GET',hostname+'/counter',true);
     request.send();
     request.onreadystatechange = function(){
       if (request.readyState == 4)
@@ -18,7 +19,7 @@ submitBtn.onclick = function (){
   //Send new name to the server and get namelist as response
   var name = nameInput.value;
   var request = new XMLHttpRequest();
-  request.open('GET','http://localhost:8080/submit-name?name='+name,true);
+  request.open('GET',hostname+'/submit-name?name='+name,true);
   request.send(null);
   request.onreadystatechange = function(){
     if (request.readyState == XMLHttpRequest.DONE)
