@@ -1,6 +1,28 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var Pool = require('pg').Pool;
+
+var config = {
+  user:'anu-asok',
+  host:'localhost',
+  password:process.env.DB_PASSWORD,
+  database:'anu-asok',
+  port:'5432'
+};
+
+var pool = new Pool(config);
+
+app.get('/test-db',function(){
+  pool.query('select * from article',function(err,result){
+    if(err){
+      res.status(500).send(err.toString());
+    }
+    else{
+      res.send(JSON.stringify(result));
+    }
+  });
+});
 
 var app = express();
 app.use(morgan('combined'));
