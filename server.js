@@ -13,6 +13,7 @@ var config = {
 
 var pool = new Pool(config);
 
+var app = express();
 app.get('/test-db',function(){
   pool.query('select * from article',function(err,result){
     if(err){
@@ -24,7 +25,6 @@ app.get('/test-db',function(){
   });
 });
 
-var app = express();
 app.use(morgan('combined'));
 
 app.get('/', function (req, res) {
