@@ -2,10 +2,9 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
-var hostname='http://db.imad.hasura-app.io';
 var config = {
   user:'anu-asok',
-  host:hostname,
+  host:'db.imad.hasura-app.io',
   password:process.env.DB_PASSWORD,
   database:'anu-asok',
   port:'5432'
@@ -14,7 +13,7 @@ var config = {
 var pool = new Pool(config);
 
 var app = express();
-app.get('/test-db',function(){
+app.get('/test-db',function(req,res){
   pool.query('select * from article',function(err,result){
     if(err){
       res.status(500).send(err.toString());
